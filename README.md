@@ -22,5 +22,5 @@ A Jupyter Notebook-based real-time spell checker for the Tigrigna language with 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/tigrigna-spell-checker.git
+git clone https://github.com/kahsay-GT/TigrignaSpellChecker.git
 cd tigrigna-spell-checker
