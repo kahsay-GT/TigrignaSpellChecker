@@ -1,0 +1,45 @@
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+packages = ["glibcLocales", "unzip"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Tigrigna Spell Checker"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "jupyter_notebook"
+
+[[workflows.workflow]]
+name = "Tigrigna Spell Checker"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install pandas ipywidgets && jupyter notebook --ip=0.0.0.0 --port=5000 --no-browser --allow-root tigrigna_autocomplete_final.ipynb"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "jupyter_notebook"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "jupyter notebook tigrigna_spell_checker.ipynb"
+
+[deployment]
+run = ["sh", "-c", "pip install pandas ipywidgets && jupyter notebook --ip=0.0.0.0 --port=5000 --no-browser --allow-root tigrigna_autocomplete_final.ipynb"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
